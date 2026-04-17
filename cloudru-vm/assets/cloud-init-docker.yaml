@@ -1,0 +1,25 @@
+#cloud-config
+# Cloud-init template: install Docker + Docker Compose on Ubuntu
+# Usage: python vm.py create --name my-vm --cloud-init-file ./assets/cloud-init-docker.yaml ...
+
+package_update: true
+package_upgrade: false
+
+packages:
+  - ca-certificates
+  - curl
+  - gnupg
+
+runcmd:
+  # Install Docker from official repo
+  - install -m 0755 -d /etc/apt/keyrings
+  - curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
+  - chmod a+r /etc/apt/keyrings/docker.asc
+  - echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu $(. /etc/os-release && echo $VERSION_CODENAME) stable" > /etc/apt/sources.list.d/docker.list
+  - apt-get update
+  - apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+  # Add default user to docker group
+  - usermod -aG docker user1
+  # Enable and start Docker
+  - systemctl enable docker
+  - systemctl start docker
