@@ -89,3 +89,4 @@ python cloudru-ai-agents/scripts/ai_agents.py chat send <agent_id> --message "П
 В каждой папке скилла есть файл `SKILL.md` — точка входа для агента. Укажите агенту на нужный `SKILL.md`, и он получит все необходимые инструкции.
 
 Скиллы агент-агностичны — работают с Claude Code, Cursor, Windsurf, Cline, Aider и любым другим агентом, который умеет читать markdown и запускать Python-скрипты.
+
