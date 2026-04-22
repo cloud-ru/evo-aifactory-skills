@@ -1,9 +1,10 @@
-# Cloud.ru ML Inference
+---
+name: cloudru-ml-inference
+description: Manage Cloud.ru ML Inference model runs — browse the predefined model catalog, deploy models with one command, manage lifecycle, and call inference endpoints. Full CRUD and inference via lightweight httpx-based client.
+compatibility: Requires httpx and CP_CONSOLE_KEY_ID, CP_CONSOLE_SECRET, PROJECT_ID environment variables
+---
 
-> **Name:** cloudru-ml-inference
-> **Description:** Manage Cloud.ru ML Inference model runs — browse the predefined model catalog, deploy models with one command, manage lifecycle, and call inference endpoints. Full CRUD and inference via lightweight httpx-based client.
-> **Required env:** `CP_CONSOLE_KEY_ID`, `CP_CONSOLE_SECRET`, `PROJECT_ID`
-> **Required pip:** `httpx`
+# Cloud.ru ML Inference
 
 ## What this skill does
 
@@ -41,9 +42,9 @@ pip install httpx
 
 ## How to use
 
-1. Read `./references/api-reference.md` for the full API surface, enums, and data models.
-2. Read `./references/examples.md` for ready-to-use Python code examples.
-3. Use `./scripts/ml_inference.py` as the main script — it supports all operations via CLI subcommands.
+1. Read `references/api-reference.md` for the full API surface, enums, and data models.
+2. Read `references/examples.md` for ready-to-use Python code examples.
+3. Use `scripts/ml_inference.py` as the main script — it supports all operations via CLI subcommands.
 
 ### Deploying models (recommended flow)
 
@@ -51,13 +52,13 @@ Always prefer deploying from the predefined catalog — it uses exact, tested co
 
 ```bash
 # 1. Browse the catalog
-python ./scripts/ml_inference.py catalog
+python scripts/ml_inference.py catalog
 
 # 2. See detailed configs for a model
-python ./scripts/ml_inference.py catalog-detail <model_card_id>
+python scripts/ml_inference.py catalog-detail <model_card_id>
 
 # 3. Deploy it
-python ./scripts/ml_inference.py deploy <model_card_id> --name "my-model"
+python scripts/ml_inference.py deploy <model_card_id> --name "my-model"
 ```
 
 The `deploy` command fetches the exact GPU type, memory, framework version, serving options, and scaling from the catalog — nothing to guess or configure manually.
@@ -66,56 +67,56 @@ The `deploy` command fetches the exact GPU type, memory, framework version, serv
 
 ```bash
 # List all model runs
-python ./scripts/ml_inference.py list
+python scripts/ml_inference.py list
 
 # Get model run details
-python ./scripts/ml_inference.py get <model_run_id>
+python scripts/ml_inference.py get <model_run_id>
 
 # Delete a model run
-python ./scripts/ml_inference.py delete <model_run_id>
+python scripts/ml_inference.py delete <model_run_id>
 
 # Suspend / Resume
-python ./scripts/ml_inference.py suspend <model_run_id>
-python ./scripts/ml_inference.py resume <model_run_id>
+python scripts/ml_inference.py suspend <model_run_id>
+python scripts/ml_inference.py resume <model_run_id>
 
 # Get event history
-python ./scripts/ml_inference.py history <model_run_id>
+python scripts/ml_inference.py history <model_run_id>
 ```
 
 ### Calling deployed models
 
 ```bash
 # Chat (OpenAI-compatible)
-python ./scripts/ml_inference.py call <model_run_id> \
+python scripts/ml_inference.py call <model_run_id> \
     --prompt "Why is the sky blue?"
 
 # Embeddings
-python ./scripts/ml_inference.py embed <model_run_id> \
+python scripts/ml_inference.py embed <model_run_id> \
     --texts "Hello world" "Another text"
 
 # Rerank
-python ./scripts/ml_inference.py rerank <model_run_id> \
+python scripts/ml_inference.py rerank <model_run_id> \
     --query "machine learning" --documents "ML is AI" "Weather is nice"
 
 # Health check
-python ./scripts/ml_inference.py ping <model_run_id>
+python scripts/ml_inference.py ping <model_run_id>
 ```
 
 ### Infrastructure queries
 
 ```bash
 # GPU/CPU quota usage
-python ./scripts/ml_inference.py quotas
+python scripts/ml_inference.py quotas
 
 # Available framework versions
-python ./scripts/ml_inference.py frameworks
+python scripts/ml_inference.py frameworks
 ```
 
 ### Advanced: custom model deployment
 
 For models not in the catalog, use `create` with manual parameters:
 ```bash
-python ./scripts/ml_inference.py create --name "my-llm" \
+python scripts/ml_inference.py create --name "my-llm" \
     --framework VLLM --resource GPU_A100 --task GENERATE \
     --source-type huggingface --repo "org/model" \
     --gpu-count 1 --gpu-memory 20 \
@@ -167,7 +168,7 @@ export OPENAI_API_KEYS="$CLOUD_RU_FOUNDATION_MODELS_API_KEY;not-needed"
 
 ### Building custom Python code
 
-When the user needs custom code beyond what the script provides, use the patterns from `./references/examples.md` to construct Python code with the `CloudruInferenceClient` from `./scripts/cloudru_client.py`.
+When the user needs custom code beyond what the script provides, use the patterns from `references/examples.md` to construct Python code with the `CloudruInferenceClient` from `scripts/cloudru_client.py`.
 
 ## What to return
 
@@ -189,8 +190,8 @@ When the user needs custom code beyond what the script provides, use the pattern
 
 ### Deploy --wait
 ```bash
-python ./scripts/ml_inference.py deploy <model_card_id> --name "my-model" --wait
-python ./scripts/ml_inference.py deploy <model_card_id> --name "my-model" --wait --wait-timeout 900
+python scripts/ml_inference.py deploy <model_card_id> --name "my-model" --wait
+python scripts/ml_inference.py deploy <model_card_id> --name "my-model" --wait --wait-timeout 900
 ```
 Polls every 15s until the model reaches RUNNING status (default timeout: 600s).
 

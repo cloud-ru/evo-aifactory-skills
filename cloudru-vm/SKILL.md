@@ -1,9 +1,10 @@
-# Cloud.ru Virtual Machines
+---
+name: cloudru-vm
+description: Create and manage Cloud.ru virtual machines — full VM lifecycle, disks, networking, security groups, SSH/SCP. Uses the Cloud.ru Compute API via lightweight httpx-based client.
+compatibility: Requires httpx and CP_CONSOLE_KEY_ID, CP_CONSOLE_SECRET, PROJECT_ID environment variables
+---
 
-> **Name:** cloudru-vm
-> **Description:** Create and manage Cloud.ru virtual machines — full VM lifecycle, disks, networking, security groups, SSH/SCP. Uses the Cloud.ru Compute API via lightweight httpx-based client.
-> **Required env:** `CP_CONSOLE_KEY_ID`, `CP_CONSOLE_SECRET`, `PROJECT_ID`
-> **Required pip:** `httpx`
+# Cloud.ru Virtual Machines
 
 Manage virtual machines on Cloud.ru: create, start/stop/reboot, resize, delete VMs. Also manage disks, view flavors, images, subnets, security groups, and availability zones.
 
@@ -36,7 +37,7 @@ pip install httpx
 
 ### CLI script
 
-The main script is `./scripts/vm.py`. It can be run from any directory (sys.path is set automatically).
+The main script is `scripts/vm.py`. It can be run from any directory (sys.path is set automatically).
 
 **Environment variables** can be provided via a `.env` file in the current working directory. The file is loaded automatically at startup. Variables already set in the environment are NOT overwritten. Format:
 ```
@@ -328,11 +329,11 @@ python vm.py create --name my-vm --login user1 --ssh-key-file ~/.ssh/id_ed25519.
 
 ## Cloud-init templates
 
-Ready-to-use cloud-init templates are in `./assets/`:
+Ready-to-use cloud-init templates are in `assets/`:
 
 - **`cloud-init-docker.yaml`** — installs Docker + Docker Compose from official repo. Usage:
   ```bash
-  python vm.py create --name docker-vm --cloud-init-file ./assets/cloud-init-docker.yaml \
+  python vm.py create --name docker-vm --cloud-init-file assets/cloud-init-docker.yaml \
     --login user1 --ssh-key-file ~/.ssh/id_ed25519.pub --wait --floating-ip --wait-ssh
   ```
   Note: Docker installation takes 3-5 minutes after cloud-init starts. After `--wait-ssh` succeeds, wait for cloud-init to finish:
@@ -342,9 +343,9 @@ Ready-to-use cloud-init templates are in `./assets/`:
 
 ## Building custom Python code
 
-When the user needs custom code beyond what the script provides, use the patterns from `./references/examples.md` to construct Python code with the `CloudruComputeClient` from `./scripts/cloudru_client.py`.
+When the user needs custom code beyond what the script provides, use the patterns from `references/examples.md` to construct Python code with the `CloudruComputeClient` from `scripts/cloudru_client.py`.
 
-For full API reference, see `./references/api-reference.md`.
+For full API reference, see `references/api-reference.md`.
 
 ## Limitations
 

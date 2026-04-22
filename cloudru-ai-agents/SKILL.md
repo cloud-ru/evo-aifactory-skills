@@ -1,10 +1,8 @@
 ---
 name: cloudru-ai-agents
 description: Manage Cloud.ru AI Agents platform — CRUD, lifecycle, triggers, workflows, MCP, marketplace, A2A chat, EvoClaw gateways
+compatibility: Requires httpx and CP_CONSOLE_KEY_ID, CP_CONSOLE_SECRET, PROJECT_ID environment variables
 ---
-
-> **Required env:** `CP_CONSOLE_KEY_ID`, `CP_CONSOLE_SECRET`, `PROJECT_ID`
-> **Required pip:** `httpx`
 
 ## What this skill does
 
@@ -239,8 +237,8 @@ python scripts/ai_agents.py marketplace get-agent <card_id>
 
 ## References
 
-- `./references/api-reference.md` — endpoint-level details, BFF vs raw API, body schemas
-- `./references/examples.md` — Python snippets using the client directly
+- `references/api-reference.md` — endpoint-level details, BFF vs raw API, body schemas
+- `references/examples.md` — Python snippets using the client directly
 
 ## Env vars
 

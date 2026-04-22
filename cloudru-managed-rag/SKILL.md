@@ -1,7 +1,7 @@
 ---
 name: cloudru-managed-rag
 description: "Cloud.ru Managed RAG: создание баз знаний и семантический поиск по документам. Используй когда пользователь хочет настроить RAG, создать базу знаний, загрузить документы, искать по базам знаний, задать вопрос по документам. Также когда упоминает RAG, базу знаний, 'найди в документах', 'что написано в доках'. Покрывает весь lifecycle: от создания инфраструктуры до поиска."
-metadata: { "requires": { "bins": ["python3"] } }
+compatibility: Requires python3, httpx, boto3 and CP_CONSOLE_KEY_ID, CP_CONSOLE_SECRET, PROJECT_ID environment variables
 ---
 
 # Cloud.ru Managed RAG

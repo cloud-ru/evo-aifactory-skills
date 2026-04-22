@@ -1,9 +1,10 @@
-# Cloud.ru Foundation Models
+---
+name: cloudru-foundation-models
+description: Work with Cloud.ru Evolution Foundation Models via the OpenAI-compatible API. List models, generate cURL/Python examples, and use Cloud.ru as a model provider.
+compatibility: Requires httpx and CLOUD_RU_FOUNDATION_MODELS_API_KEY environment variable
+---
 
-> **Name:** cloudru-foundation-models
-> **Description:** Work with Cloud.ru Evolution Foundation Models via the OpenAI-compatible API. List models, generate cURL/Python examples, and use Cloud.ru as a model provider.
-> **Required pip:** `httpx`
-> **Required env:** `CLOUD_RU_FOUNDATION_MODELS_API_KEY`
+# Cloud.ru Foundation Models
 
 ## What this skill does
 
@@ -37,22 +38,22 @@ The user must have `CLOUD_RU_FOUNDATION_MODELS_API_KEY` set. If the key is missi
 
 ```bash
 # List available models (shows model ID, owner, type)
-python3 ./scripts/fm.py models
+python3 scripts/fm.py models
 
 # List models as raw JSON
-python3 ./scripts/fm.py models --json
+python3 scripts/fm.py models --json
 
 # Call a model
-python3 ./scripts/fm.py call <model_id> --prompt "Hello!"
+python3 scripts/fm.py call <model_id> --prompt "Hello!"
 
 # Call with system prompt and temperature
-python3 ./scripts/fm.py call <model_id> --prompt "Explain AI" --system "Be brief" --temperature 0.3
+python3 scripts/fm.py call <model_id> --prompt "Explain AI" --system "Be brief" --temperature 0.3
 ```
 
 ## How to use
 
-1. Read `./references/api-usage.md` for cURL and Python examples.
-2. Read `./references/agent-provider-setup.md` when the user wants to configure an AI agent to use Cloud.ru as a model provider.
+1. Read `references/api-usage.md` for cURL and Python examples.
+2. Read `references/agent-provider-setup.md` when the user wants to configure an AI agent to use Cloud.ru as a model provider.
 3. Prefer fetching the live model catalog from `/v1/models` instead of hard-coding model IDs.
 4. Model IDs can contain `/` — keep the full ID unchanged.
 

@@ -1,10 +1,10 @@
-# Cloud.ru Account Setup
+---
+name: cloudru-account-setup
+description: Create a Cloud.ru service account, Foundation Models API key, and IAM access key (CP_CONSOLE_KEY_ID/CP_CONSOLE_SECRET). Use when the user needs to bootstrap Cloud.ru API access from scratch.
+compatibility: Requires python3, httpx, playwright (for browser flow)
+---
 
-> **Name:** cloudru-account-setup
-> **Description:** Create a Cloud.ru service account, Foundation Models API key, and IAM access key (CP_CONSOLE_KEY_ID/CP_CONSOLE_SECRET). Use when the user needs to bootstrap Cloud.ru API access from scratch.
-> **Required tools:** `python3`
-> **Required pip:** `httpx`
-> **Required pip (browser flow):** `playwright`
+# Cloud.ru Account Setup
 
 ## What this skill does
 
@@ -35,7 +35,7 @@ pip install playwright && playwright install chromium
 ### Step 2: Run the browser login script
 
 ```bash
-python3 ./scripts/browser_login.py
+python3 scripts/browser_login.py
 ```
 
 This opens a Chromium window with the Cloud.ru login page. The user logs in and navigates to their project. The script automatically:
@@ -63,7 +63,7 @@ If the script times out (default 180s), pass `--timeout 300` for more time.
 Take the `project_url` and `token` from Step 2 and pass them to the bootstrap script:
 
 ```bash
-python3 ./scripts/cloudru_account_bootstrap.py \
+python3 scripts/cloudru_account_bootstrap.py \
   --project-url '<project_url from step 2>' \
   --token '<token from step 2>'
 ```
@@ -83,7 +83,7 @@ The bootstrap script outputs JSON with:
 If the user already has the project URL and token (or doesn't want to use the browser script):
 
 ```bash
-python3 ./scripts/cloudru_account_bootstrap.py \
+python3 scripts/cloudru_account_bootstrap.py \
   --project-url '<project-url>' \
   --project-id '<project-id>' \
   --customer-id '<customer-id>' \
